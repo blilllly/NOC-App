@@ -1,8 +1,6 @@
 import { Attachment, Resend } from 'resend';
 import { envs } from '../../config/plugins/envs.plugins';
 import fs from 'fs';
-import { LogRepository } from '../../domain/repository/log.repository';
-import { LogEntity, LogSeverityLevel } from '../../domain/entities/log.entity';
 
 interface SendEmailOptions {
   to: string | string[];
@@ -21,7 +19,7 @@ export class EmailService {
   private resend: Resend;
   private defautlFrom = 'onboarding@resend.dev';
 
-  constructor(private readonly logRepository: LogRepository) {
+  constructor() {
     this.resend = new Resend(envs.RESEND_API_KEY);
   }
 
@@ -42,20 +40,8 @@ export class EmailService {
       });
 
       // console.log(information);
-      const log = new LogEntity({
-        level: LogSeverityLevel.low,
-        message: 'Email Sent',
-        origin: 'email.service.ts',
-      });
-      this.logRepository.saveLog(log);
       return true;
     } catch (error) {
-      const log = new LogEntity({
-        level: LogSeverityLevel.high,
-        message: 'Email not Sent',
-        origin: 'email.service.ts',
-      });
-      this.logRepository.saveLog(log);
       return false;
     }
   }
@@ -82,7 +68,7 @@ export class EmailService {
       },
     ];
 
-    this.sendEmail({
+    return this.sendEmail({
       to,
       subject,
       attachments,
