@@ -9,7 +9,7 @@ import { PrismaClient } from './generated/prisma/client';
 })();
 
 async function main() {
-  await MongoDatabase.connet({
+  await MongoDatabase.connect({
     mongoUrl: envs.MONGO_URL,
     dbName: envs.MONGO_DB_NAME,
   });

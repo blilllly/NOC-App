@@ -2,6 +2,9 @@ node_modules/
 dist/
 logs/
 .env
+.env.test
 mongo/
 postgres/
 generated/
+mongo-test/
+postgres-test/

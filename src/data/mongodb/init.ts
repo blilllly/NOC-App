@@ -6,7 +6,7 @@ interface ConnectionOptions {
 }
 
 export class MongoDatabase {
-  static async connet(options: ConnectionOptions) {
+  static async connect(options: ConnectionOptions) {
     const { mongoUrl, dbName } = options;
     try {
       await mongoose.connect(mongoUrl, { dbName });

@@ -38,14 +38,14 @@ export class Server {
     // const logs = await logRepository.getLogs(LogSeverityLevel.low);
     // console.log(logs);
 
-    CronService.createJob('*/5 * * * * *', () => {
-      const url = 'https://google.com';
+    // CronService.createJob('*/5 * * * * *', () => {
+    //   const url = 'https://google.com';
 
-      new CheckServiceMultiple(
-        logRepositories,
-        () => console.log(`${url} is ok`),
-        (error) => console.log(error),
-      ).execute(url);
-    });
+    //   new CheckServiceMultiple(
+    //     logRepositories,
+    //     () => console.log(`${url} is ok`),
+    //     (error) => console.log(error),
+    //   ).execute(url);
+    // });
   }
 }
