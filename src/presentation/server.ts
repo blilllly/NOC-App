@@ -12,7 +12,7 @@ const pgLogRepository = new LogRepositoryImpl(new PostgresLogDatasource());
 
 const logRepositories = [fsLogRepository, mgLogRepository, pgLogRepository];
 
-const emailService = new EmailService();
+// const emailService = new EmailService();
 
 export class Server {
   public static async start() {
