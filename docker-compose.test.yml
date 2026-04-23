@@ -1,5 +1,3 @@
-version: '4.68'
-
 services:
   mongo-db:
     image: mongo:8.2.6
