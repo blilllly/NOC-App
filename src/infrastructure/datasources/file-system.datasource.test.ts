@@ -59,5 +59,36 @@ describe('file-system.datasource.ts', () => {
     expect(highLogs).toContain(JSON.stringify(log));
   });
 
-  it('should return all logs', () => {});
+  it('should return all logs', async () => {
+    const logDatasource = new FileSystemDatasource();
+    const logLow = new LogEntity({
+      message: 'log-low',
+      level: LogSeverityLevel.low,
+      origin: 'low',
+    });
+    const logMedium = new LogEntity({
+      message: 'log-medium',
+      level: LogSeverityLevel.medium,
+      origin: 'medium',
+    });
+    const logHigh = new LogEntity({
+      message: 'log-high',
+      level: LogSeverityLevel.high,
+      origin: 'high',
+    });
+
+    await logDatasource.saveLog(logLow);
+    await logDatasource.saveLog(logMedium);
+    await logDatasource.saveLog(logHigh);
+
+    const logsLow = await logDatasource.getLogs(LogSeverityLevel.low);
+    const logsMedium = await logDatasource.getLogs(LogSeverityLevel.medium);
+    const logsHigh = await logDatasource.getLogs(LogSeverityLevel.high);
+
+    expect(logsLow).toEqual(
+      expect.arrayContaining([logLow, logMedium, logHigh]),
+    );
+    expect(logsMedium).toEqual(expect.arrayContaining([logMedium]));
+    expect(logsHigh).toEqual(expect.arrayContaining([logHigh]));
+  });
 });
