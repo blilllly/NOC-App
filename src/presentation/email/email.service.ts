@@ -10,11 +10,6 @@ interface SendEmailOptions {
   attachments?: Attachment[];
 }
 
-// interface Attachment {
-//   filename: string;
-//   content: string;
-// }
-
 export class EmailService {
   private resend: Resend;
   private defautlFrom = 'onboarding@resend.dev';
@@ -38,8 +33,6 @@ export class EmailService {
         html,
         attachments,
       });
-
-      // console.log(information);
       return true;
     } catch (error) {
       return false;
